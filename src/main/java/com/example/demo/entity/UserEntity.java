@@ -1,9 +1,10 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
+
+// сущность связанная с БД
 
 @Entity
 public class UserEntity {
@@ -12,6 +13,9 @@ public class UserEntity {
     private Long id;
     private String username;
     private String password;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<TodoEntity> todos;
 
     public UserEntity() {
     }
@@ -38,5 +42,9 @@ public class UserEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<TodoEntity> getTodos() {
+        return todos;
     }
 }
